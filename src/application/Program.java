@@ -30,6 +30,11 @@ public class Program {
         sellers.stream().forEach(sellerFind -> System.out.println(sellerFind));
         System.out.println();
 
+        System.out.println("===== Test 4: seller insert =====");
+        Seller newSeller = new Seller(null, "Gabriel Antônio", "gabriel@gmail.com", new Date(), 5000.00, department);
+        sellerDao.insert(newSeller);
+        System.out.println("Inserted! New Seller with id: " + newSeller.getId());
+
 
 
 
