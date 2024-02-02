@@ -32,7 +32,24 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement st = null;
 
+        try {
+            st = conn.prepareStatement(
+                    "DELETE FROM department WHERE Id = ?"
+
+            );
+
+            st.setInt(1, id);
+            st.executeUpdate();
+
+        }
+        catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
@@ -68,11 +85,10 @@ public class DepartmentDaoJDBC implements DepartmentDao {
             rs = st.executeQuery();
 
             List<Department> list = new ArrayList<>();
-            if(rs.next()){
-                while (rs.next()){
-                    Department department = instanciateDeparment(rs);
-                    list.add(department);
-                }
+
+            while (rs.next()){
+                Department department = instanciateDeparment(rs);
+                list.add(department);
             }
             return list;
         }

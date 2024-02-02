@@ -21,5 +21,11 @@ public class Program2 {
         System.out.println("===== Test 1 : Department findById =====");
         List<Department> departmentsList = departmentDao.findAll();
         departmentsList.stream().forEach(department -> System.out.println(department));
+        System.out.println();
+        
+        System.out.println("===== Test 1 : Department Delete =====");
+        departmentDao.deleteById(6);
+        System.out.println("Deleted completed!");
+        System.out.println();
     }
 }
